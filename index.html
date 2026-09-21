@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbandingan Titik Panas Karhutla 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <header class="bg-gradient-to-r from-red-700 via-orange-600 to-amber-600 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+                    <i class="fa-solid fa-fire-flame-curved text-2xl text-amber-200"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Monitoring Karhutla 2026</h1>
+                    <p class="text-xs sm:text-sm text-amber-100">Analisis Perbandingan Titik Panas (Hotspot) Sipongi vs Atlas Nusantara</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-400/20 border border-amber-300/30 text-amber-100">
+                    <i class="fa-solid fa-calendar-days mr-1.5"></i> Tahun 2026 (Jan - 21 Sep)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Statistics Cards Grid -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Sipongi Total -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute right-0 top-0 translate-x-3 -translate-y-3 w-24 h-24 bg-red-50 rounded-full pointer-events-none"></div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Sipongi (KLHK)</p>
+                    <h3 id="stat-sipongi" class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">0</h3>
+                    <p class="text-xs text-red-600 font-medium mt-1 flex items-center"><i class="fa-solid fa-chart-line mr-1"></i> Data s.d. 21 September</p>
+                </div>
+                <div class="p-4 bg-red-100 text-red-600 rounded-2xl">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+            </div>
+
+            <!-- Atlas Nusantara Total -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute right-0 top-0 translate-x-3 -translate-y-3 w-24 h-24 bg-orange-50 rounded-full pointer-events-none"></div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Atlas Nusantara</p>
+                    <h3 id="stat-atlas" class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">0</h3>
+                    <p class="text-xs text-orange-600 font-medium mt-1 flex items-center"><i class="fa-solid fa-chart-line mr-1"></i> Data s.d. 21 September</p>
+                </div>
+                <div class="p-4 bg-orange-100 text-orange-600 rounded-2xl">
+                    <i class="fa-solid fa-globe text-xl"></i>
+                </div>
+            </div>
+
+            <!-- Puncak Sipongi -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute right-0 top-0 translate-x-3 -translate-y-3 w-24 h-24 bg-amber-50 rounded-full pointer-events-none"></div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Puncak Sipongi</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">September</h3>
+                    <p class="text-xs text-slate-500 mt-1">11.731 Titik Panas</p>
+                </div>
+                <div class="p-4 bg-amber-100 text-amber-600 rounded-2xl">
+                    <i class="fa-solid fa-fire text-xl"></i>
+                </div>
+            </div>
+
+            <!-- Puncak Atlas -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute right-0 top-0 translate-x-3 -translate-y-3 w-24 h-24 bg-rose-50 rounded-full pointer-events-none"></div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Puncak Atlas Nusantara</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">September</h3>
+                    <p class="text-xs text-slate-500 mt-1">701.856 Titik Panas</p>
+                </div>
+                <div class="p-4 bg-rose-100 text-rose-600 rounded-2xl">
+                    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-area text-red-600"></i> Grafik Perbandingan Titik Panas 2026 (s.d. 21 September)
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5 italic">Klik lingkaran untuk detail</p>
+                </div>
+                
+                <!-- Scale Toggle Controls -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl self-stretch sm:self-auto justify-center">
+                    <button id="btn-linear" onclick="setScaleMode('linear')" class="flex-1 sm:flex-none px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-800 shadow-sm transition-all">
+                        <i class="fa-solid fa-chart-line mr-1"></i> Skala Linear
+                    </button>
+                    <button id="btn-log" onclick="setScaleMode('logarithmic')" class="flex-1 sm:flex-none px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 transition-all">
+                        <i class="fa-solid fa-chart-column mr-1"></i> Skala Logaritmik
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notice for Log Scale -->
+            <div id="log-notice" class="hidden mb-4 p-3 bg-blue-50 border border-blue-200 text-blue-700 text-xs rounded-xl flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-blue-500 flex-shrink-0 text-sm"></i>
+                <span><strong>Mode Logaritmik Aktif:</strong> Digunakan untuk meratakan rentang angka yang sangat jauh antara Sipongi dan Atlas Nusantara agar tren bulanan terlihat bersamaan dengan jelas.</span>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="relative w-full h-[380px] sm:h-[450px]">
+                <canvas id="karhutlaChart"></canvas>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-auto py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-2">
+            <p class="italic">Irfan Maulana / Mongabay Indonesia</p>
+            <p class="text-center sm:text-right">Data bergerak secara real-time, pantau perkembangannya melalui <a href="https://siga.menlhk.go.id/" target="_blank" class="text-red-600 underline font-medium hover:text-red-800">Sipongi</a> dan <a href="https://www.atlasnusantara.id/" target="_blank" class="text-orange-600 underline font-medium hover:text-orange-800">Atlas Nusantara</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const months = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        const sipongiData = [110, 157, 396, 145, 119, 166, 758, 9409, 11731, null, null, null];
+        const atlasData = [3936, 11969, 27525, 35366, 35366, 57807, 96736, 388674, 701856, null, null, null];
+
+        let karhutlaChart = null;
+        let currentScale = 'linear';
+
+        function formatNumber(num) {
+            if (num === null || num === undefined) return '-';
+            return num.toLocaleString('id-ID');
+        }
+
+        function updateSummaryStats() {
+            const totalSipongi = sipongiData.reduce((acc, val) => acc + (val || 0), 0);
+            const totalAtlas = atlasData.reduce((acc, val) => acc + (val || 0), 0);
+
+            document.getElementById('stat-sipongi').innerText = formatNumber(totalSipongi);
+            document.getElementById('stat-atlas').innerText = formatNumber(totalAtlas);
+        }
+
+        function initChart(scaleType = 'linear') {
+            const ctx = document.getElementById('karhutlaChart').getContext('2d');
+            
+            if (karhutlaChart) {
+                karhutlaChart.destroy();
+            }
+
+            karhutlaChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [
+                        {
+                            label: 'Sipongi (Kementerian Kehutanan)',
+                            data: sipongiData,
+                            borderColor: '#dc2626',
+                            backgroundColor: '#dc2626',
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            tension: 0.2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Atlas Nusantara',
+                            data: atlasData,
+                            borderColor: '#ea580c',
+                            backgroundColor: '#ea580c',
+                            borderWidth: 3,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            tension: 0.2,
+                            yAxisID: 'y'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Inter',
+                                    size: 12,
+                                    weight: '600'
+                                },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { family: 'Inter', size: 13, weight: 'bold' },
+                            bodyFont: { family: 'Inter', size: 12 },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toLocaleString('id-ID') + ' titik panas';
+                                        if (context.dataIndex === 8) { // September index
+                                            label += ' (s.d. 21 Sep)';
+                                        }
+                                    } else {
+                                        label += 'Data belum tersedia';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(226, 232, 240, 0.6)'
+                            },
+                            ticks: {
+                                font: { family: 'Inter', size: 11 }
+                            }
+                        },
+                        y: {
+                            type: scaleType,
+                            position: 'left',
+                            grid: {
+                                color: 'rgba(226, 232, 240, 0.6)'
+                            },
+                            ticks: {
+                                font: { family: 'Inter', size: 11 },
+                                callback: function(value) {
+                                    if (scaleType === 'logarithmic') {
+                                        if (value === 10 || value === 100 || value === 1000 || value === 10000 || value === 100000 || value === 1000000) {
+                                            return value.toLocaleString('id-ID');
+                                        }
+                                        return '';
+                                    }
+                                    return value.toLocaleString('id-ID');
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: scaleType === 'logarithmic' ? 'Jumlah Titik Panas (Skala Log 10)' : 'Jumlah Titik Panas',
+                                font: { family: 'Inter', size: 12, weight: '600' }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function setScaleMode(mode) {
+            currentScale = mode;
+            const btnLinear = document.getElementById('btn-linear');
+            const btnLog = document.getElementById('btn-log');
+            const logNotice = document.getElementById('log-notice');
+
+            if (mode === 'linear') {
+                btnLinear.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-800 shadow-sm transition-all";
+                btnLog.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 transition-all";
+                logNotice.classList.add('hidden');
+            } else {
+                btnLog.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-800 shadow-sm transition-all";
+                btnLinear.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-800 transition-all";
+                logNotice.classList.remove('hidden');
+            }
+
+            initChart(mode);
+        }
+
+        window.onload = function() {
+            updateSummaryStats();
+            initChart('linear');
+        };
+    </script>
+</body>
+</html>
